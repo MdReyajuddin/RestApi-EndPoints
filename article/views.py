@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Article
 from .serializers import ArticleSerializer
@@ -39,11 +40,13 @@ from .serializers import ArticleSerializer
 class ArticleListPostView(ListCreateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+    permission_classes = ('IsAuthenticated',)
 
 
 class SingleArticleView(RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+    permission_classes = ('IsAuthenticated',)
 
 
 
